@@ -1,0 +1,44 @@
+Technical skills listed include expertise in Frontend/UI, Backend & APIs, SRE & Observability, Cloud & DevOps, Architecture, Databases, and Testing. Applied skills cover Digital Modernization, CI/CD automation, Micro-Frontend Development, Tooling/Framework Development, SRE Implementation, Security, Performance Engineering, and efficiency improvements. 
+Proficiency in Java, J2EE, or Spring Boot.
+Angular CLI, React, Node.js, and CSS/CSS pre-processors.
+source code management tools like Git, GitHub, Bitbucket, or Gitlab.
+Databases: Oracle, PostgreSQL, DynamoDB, DB2, MySQL, Mongodb
+Testing: JUnit, TestNG, Cucumber, Loadrunner, Apache jmeter, Gattling,
+Frontend/UI: Micro-Frontend, React.js, Angular, HTML5, CSS3, Bootstrap, Karma/Jasmine/Jest, AG grid
+grid
+Backend & APIs: Java, J2EE, Spring Boot, REST/SOAP , Reactive Microservices, JPA, Hibernate,
+Rsocket, Scala, nodejs, Redis, Kafka
+SRE & Observability: Prometheus, Grafana, Micrometer, Zipkin, Sleuth, Alerting Frameworks,
+Reliability Testing, SLI/SLO/SLA governance.
+Cloud & DevOps: AWS (Lambda, API Gateway, Cognito, SNS, SES, SQS, IAM), GCP (Big Query, cloud storage, GKE, cloud run, CDN) , OpenShift,
+Kubernetes, Docker, Jenkins, Maven, Gradle, Github Actions, Jenkins
+Architecture: Microservices patterns, DDD, Event-Driven Architecture, Clean Architecture, TDD, J2EE
+Patterns
+Databases: Oracle, PostgreSQL, DynamoDB, DB2, MySQL, Mongodb
+Testing: JUnit, TestNG, Cucumber, Loadrunner, Apache jmeter, Gattling,
+
+
+Business Skills
+Strategic and Leadership Skills
+Technology Leadership: Over 19 years of experience leading teams, shaping technology roadmaps, and driving enterprise-scale digital modernization.
+Strategic Impact & Achievements: Proven track record of influencing enterprise architecture, aligning IT delivery with strategic business objectives, and acting as a trusted advisor to senior stakeholders.
+Driving Innovation: Championed innovation by developing frameworks and accelerators adopted across multiple programs and publishing solution patterns.
+Enterprise Transformation: Modernized legacy banking platforms into cloud-native microservices, demonstrating business transformation expertise.
+People Leadership: Led and mentored global engineering teams, driving performance management and skill development for junior developers.
+Business Alignment: Collaborated with business leaders to align technology roadmaps with digital transformation strategy. 
+
+Operational and Management Skills
+
+Program and Project Management: Directed and led digital transformation programs and managed the delivery of mission-critical banking applications.
+Cost Management: Modernized platforms to achieve 40% cost savings and reduced maintenance effort by 70%, eliminating licensing costs.
+Compliance & Risk Management: Championed security-first architecture to achieve 100% regulatory compliance and improved customer trust.
+Operational Excellence: Advanced operational resilience by architecting SRE solutions and improving delivery velocity through standardization.
+Agile Expertise: Facilitated SAFe Agile adoption, improving release predictability and stakeholder satisfaction.
+Process Improvement: Implemented reusable templates, design patterns, and component libraries to improve development processes and productivity. 
+
+Communication and Relationship Skills
+
+Stakeholder Management: Served as a trusted advisor to senior stakeholders, influencing global architecture councils.
+Communication and Influence: Demonstrated thought leadership by presenting in technology councils and influencing future digital banking platforms.
+Mentorship: Mentored junior developers and participated in leadership programs, showing a commitment to developing others.
+Collaboration: Led cross-functional teams and partnered with business stakeholders to define product roadmaps. 

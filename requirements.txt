@@ -179,7 +179,7 @@ httpx-sse==0.4.0
     # via
     #   langchain-community
     #   mcp
-huggingface-hub==0.32.4
+huggingface-hub==0.34.0
     # via
     #   gradio
     #   gradio-client
@@ -694,3 +694,5 @@ pypdf
 python-dotenv
 requests
 openai
+sentence-transformers
+setuptools

@@ -3,3 +3,176 @@ Turning complex banking challenges into innovative technology solutions that acc
 Technology leader passionate about mentoring teams, driving cloud modernization, and aligning IT with business strategy.
 
 I like to play badminton and chess. Spend time with my 2 lovely kids.
+
+Rahul Dnyaneshwar Kolhe
+Assistant Vice President | Technology Lead | Cloud & Digital Transformation
+Technology Strategist | AVP – Driving Digital Banking Innovation, Cloud Transformation & Enterprise Resilience
+Professional Summary
+Technology leader with 19+ years of experience in banking and financial services, specializing in cloud
+transformation, microservices architecture, and platform engineering. As Assistant Vice President &
+Technology Lead, I bring a proven track record of driving enterprise-scale digital modernization, shaping
+technology roadmaps, and leading global engineering teams to deliver secure, scalable, and
+business-critical solutions.
+I combine deep technical expertise in cloud-native systems, SRE, and DevOps with a strong ability to
+mentor teams, influence enterprise architecture standards, and align IT delivery with strategic business
+objectives. Recognized as a trusted advisor and thought leader, I have consistently delivered programs
+that improved customer trust, accelerated product innovation, and enabled digital adoption in banking
+ecosystems.
+Strategic Impact & Achievements
+
+Shaped enterprise banking transformation by modernizing legacy platforms into cloud-native
+microservices architectures, delivering 40% cost savings and enterprise-wide scalability.
+Accelerated product innovation by building reusable templates, design patterns, and component
+libraries adopted by global teams, reducing onboarding time for junior developers and ensuring
+enterprise coding standards.
+
+Advanced operational resilience by architecting end-to-end SRE solutions with Prometheus,
+Grafana, and Zipkin, enabling 40% MTTR reduction and regulatory-grade observability.
+Championed innovation by developing frameworks and accelerators that were adopted across
+multiple programs, driving standardization and increasing delivery velocity.
+Delivered business impact by leading cross-functional teams to launch mission-critical banking
+applications that improved customer experience, reduced processing risks, and enhanced
+compliance.
+
+Trusted advisor to senior stakeholders, shaping enterprise technology strategy, influencing global
+architecture councils, and driving organization-wide transformation
+Improved customer trust and digital adoption by delivering regulatory-grade secure architecture
+Recognized thought leader, awarded Best Emerging Leader, Delivery Excellence, Idea Champion,
+and Associate of the Quarter for contributions to innovation, delivery governance, and engineering
+excellence.
+
+Innovation & Thought leadership
+
+Published solution patterns and accelerators adopted across global teams.
+Speaker/presenter in internal technology councils and industry forums.
+
+Recognized for influencing strategic digital transformation initiatives.
+Contributed to enterprise-wide innovation forums, influencing future digital banking platforms
+Acted as a mentor for leadership programs, developing next-generation engineering
+Core Competency
+
+Frontend/UI: Micro-Frontend, React.js, Angular, HTML5, CSS3, Bootstrap, Karma/Jasmine/Jest, AG
+grid
+
+Backend & APIs: Java, J2EE, Spring Boot, REST/SOAP , Reactive Microservices, JPA, Hibernate,
+Rsocket, Scala, nodejs, Redis, Kafka
+
+SRE & Observability: Prometheus, Grafana, Micrometer, Zipkin, Sleuth, Alerting Frameworks,
+Reliability Testing, SLI/SLO/SLA governance.
+
+Cloud & DevOps: AWS (Lambda, API Gateway, Cognito, SNS, SES, SQS, IAM), GCP , OpenShift,
+Kubernetes, Docker, Jenkins, Maven, Gradle, Github Actions, Jenkins
+
+Architecture: Microservices patterns, DDD, Event-Driven Architecture, Clean Architecture, TDD, J2EE
+Patterns
+
+Databases: Oracle, PostgreSQL, DynamoDB, DB2, MySQL, Mongodb
+Testing: JUnit, TestNG, Cucumber, Loadrunner, Apache jmeter, Gattling,
+Other: IBM Mainframe, COBOL, JCL, VSAM
+
+Experience
+
+DBOI Global Services Private Limited — (2020 – Present)
+Assistant Vice President / Senior Engineer
+Cognizant Technology Solutions - (2008 – 2020)
+Delivery Lead
+Lionbridge Technology - (2004 – 2008)
+Software Engineer
+
+DBOI Global Services Pvt. Ltd. (2020 – Present) -
+◆
+Architected and delivered cloud-native, event-driven microservices solutions with Spring
+Boot, RSocket, and API Gateway, enhancing system scalability and performance by 3X.
+◆
+Designed and implemented micro-frontend applications (React, Webpack Module
+Federation) to improve UX and accelerate product delivery cycles.
+◆
+Established UX standards and developed a reusable component library (>100 UI
+components), ensuring consistent digital experience across enterprise platforms.
+◆ Pioneered innovative solutions, including an automated dependency update framework
+(Renovate Bot in CI/CD) and downstream workflow redesign, which reduced maintenance
+effort by 70% and eliminated $500K in licensing costs.
+➔
+◆ Developed standardized templates, reusable frameworks, and design patterns adopted by
+junior developers, reducing onboarding time and ensuring coding best practices across
+teams.
+◆ Created a centralized component library and coding guidelines, improving code quality,
+reusability, and consistency across multiple banking applications.
+◆ Mentored and coached junior developers, accelerating their technical growth and enabling
+faster delivery of high-quality solutions.
+◆ Drove adoption of innovation-led accelerators and solution patterns, scaling productivity
+improvements across multiple projects.
+◆
+Led enterprise DevOps transformation, automating CI/CD pipelines with GitHub Actions,
+Docker, and Kubernetes, reducing release cycles from 2 months to 2 weeks.
+◆
+Migrated legacy ETL workflows (577 feeds) into microservices-based architecture, saving
+$500K annually in licensing costs.
+◆ Championed security-first architecture, implementing OAuth 2.0 and 2FA to achieve 100%
+regulatory compliance across banking applications.
+◆
+Designed and implemented enterprise-grade SRE solutions, integrating monitoring,
+alerting, and observability into mission-critical banking applications.
+◆ Built end-to-end observability framework using Prometheus, Grafana, Micrometer, Zipkin,
+and Sleuth, enabling proactive issue detection and reducing MTTR by 40%.
+◆ Developed SRE-driven SLIs/SLOs/SLAs, providing transparency into system reliability and
+improving stakeholder confidence in production stability.
+◆ Automated incident management workflows with alerting dashboards and self-healing
+mechanisms, significantly reducing downtime.
+◆ Integrated SRE practices into DevOps pipelines, ensuring reliability testing and resilience
+engineering became part of release cycles.
+◆ Contributed multiple innovative frameworks and accelerators that were adopted as
+reusable assets across teams, driving organization-wide eﬃciency and standardization.
+◆ Collaborated with business leaders to align technology roadmaps with digital
+transformation strategy, enabling faster go-to-market for financial products.
+
+Cognizant Technology -
+◆ Directed digital transformation programs for global banks, migrating legacy platforms to
+cloud-native architectures (AWS, Oracle Banking Platform).
+◆ Delivered mission-critical solutions for debit/credit card processing, loan origination, and
+collections & recovery, improving transaction eﬃciency and reducing processing costs.
+◆ Led and mentored teams of 25+ engineers, driving performance management, skill
+development, and building future technology leaders.
+◆ Defined and implemented enterprise architecture standards, leveraging microservices,
+REST APIs, and integration with OBP core banking modules, improving product launch
+timelines.
+◆ Drove innovation by conceptualizing and piloting multiple solution accelerators that
+reduced development effort and enabled faster onboarding of projects.
+◆ Partnered with stakeholders (business & technology) to define product roadmaps, ensuring
+alignment with strategic business goals.
+◆ Facilitated SAFe Agile adoption, improving release predictability, stakeholder satisfaction,
+and delivery velocity.
+◆ Introduced solution accelerators, code templates, and reference architectures that
+streamlined development for large-scale banking programs.
+◆ Enabled junior and mid-level developers to deliver production-grade features faster by
+providing ready-to-use design patterns and reusable modules.
+◆ Conducted technical training sessions and code reviews, institutionalizing engineering
+excellence across teams.
+➔
+Lionbridge Technology -
+●
+Developed and maintained web applications for insurance and financial clients using
+Java/J2EE, delivering secure and high-performance solutions.
+●
+Built secure data integration workflows, improving data accuracy and reducing risk in
+financial systems.
+●
+Contributed to QA automation, cutting regression cycle times by 30%.
+Certifications -
+
+DB Cloud Engineer
+DB Cloud Data Engineer
+Certified Scrum Master (CSM)
+SAFe Agile Certified
+Udemy certifications: Microfrontend, Rsocket, Redis masterclass
+GCP QWIK labs 
+
+Education -
+Bachelor of Engineering (B.E.) – 2003, Badnera College of Engineering, Amravati
+
+Recognition & Awards -
+Consistently recognized for leadership, innovation, and delivery excellence, including:
+★ Best Emerging Leader – for driving team performance and leadership growth.
+★ Delivery Excellence Award – for ensuring on-time, high-quality delivery of complex programs.
+★ Idea Champion Award – for pioneering innovative accelerators and reusable frameworks.
+★ Associate of the Quarter – for exceptional contribution to business-critical projects.

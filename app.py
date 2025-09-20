@@ -1,3 +1,7 @@
+import smtplib
+import ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 import uvicorn
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -5,9 +9,12 @@ import json
 import os
 import requests
 import glob
+import numpy as np
 from pypdf import PdfReader
-from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, File, UploadFile
+from sentence_transformers import SentenceTransformer, util
+
 
 
 load_dotenv(override=True)
@@ -25,8 +32,27 @@ load_dotenv(override=True)
 def push(text):
     print(text)
 
+def send_email(to_email, subject, body):
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
+    sender_email = os.getenv("EMAIL_USER")   # your Gmail
+    sender_pass = os.getenv("EMAIL_PASS")   # app password
+
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg["From"] = sender_email
+    msg["To"] = to_email
+
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls()
+        server.login(sender_email, sender_pass)
+        server.sendmail(sender_email, [to_email], msg.as_string())
+
 def record_user_details(email, name="Name not provided", notes="not provided"):
-    push(f"Recording {name} with email {email} and notes {notes}")
+    body = f"Recruiter shared details:\n\nName: {name}\nEmail: {email}\nNotes: {notes}"
+    subject = "Recruiter Interested!"
+    body = f"A recruiter shared their email: {email}\n\nReply ASAP!"
+    send_email("rahul.d.kolhe@gmail.com", subject, body)
     return {"recorded": "ok"}
 
 def record_unknown_question(question):
@@ -60,7 +86,7 @@ record_user_details_json = {
 
 record_unknown_question_json = {
     "name": "record_unknown_question",
-    "description": "Always use this tool to record any question that couldn't be answered as you didn't know the answer or user is asking more than 2 question about user",
+    "description": "Always use this tool to record any question that couldn't be answered as you didn't know the answer or user is asking more than 3 question",
     "parameters": {
         "type": "object",
         "properties": {
@@ -106,13 +132,67 @@ async def ask(payload: dict):
     answer = me.chat(question, history)
     return {"answer": answer}
 
-if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=7860, reload=False)
-    
-class Me:
-    def __init__(self):
+@app.post("/api/match")
+async def match_job(file: UploadFile = File(...)):
+    # Extract JD text
+    text = ""
+    if file.filename.endswith(".pdf"):
+        reader = PdfReader(file.file)
+        for page in reader.pages:
+            text += page.extract_text() or ""
+    else:
+        text = (await file.read()).decode("utf-8")
 
-        google_api_key = os.getenv('GOOGLE_API_KEY')
+    print(text)
+    # Get embedding for JD
+    if text is not None:
+        jd_embedding = me.get_embedding(text)
+        overall_similarity_score = util.cos_sim(me.resume_embedding, jd_embedding).item()
+
+    # Get missing skills
+    missing_skills = []
+    # Only if the overall match is not perfect, analyze for missing skills
+    if overall_similarity_score < 0.85:  # Threshold for "good enough" match
+        jd_skills_list = me.get_missing_skills(text)
+
+        # Step 2: Compare each JD skill against the resume skills embedding
+        for jd_skill in jd_skills_list:
+            skill_embedding = me.get_embedding(jd_skill)
+            
+            # Compare the JD skill against the resume's skills section
+            skill_similarity = util.cos_sim(me.resume_skills_embedding, skill_embedding).item()
+
+            if skill_similarity < 0.4: # Use a suitable threshold
+                # Step 3: Use LLM to verify if the skill is truly missing
+                prompt = (
+                    f"Given the following resume skills: '{me.skills}', "
+                    f"and the job requirement: '{jd_skill}'. "
+                    f"Does the resume meet this requirement, or is it missing? "
+                    f"Answer with 'Missing' or 'Present' and concise and small explanantion"
+                )
+                
+                response = me.gemini.chat.completions.create(
+                    model="gemini-2.5-flash-preview-05-20", 
+                    messages=[
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": prompt}
+                    ]
+                )
+                
+                llm_response = response.choices[0].message.content.strip()
+                if "Missing" in llm_response:
+                    missing_skills.append(llm_response)
+    # Return the results
+    return {
+        "relevance": round(overall_similarity_score * 100, 2),
+        "message": f"Your profile matches {round(overall_similarity_score * 100, 2)}% with this JD 🚀",
+        "missing_skills": missing_skills
+    }
+  
+class Me:
+    def __init__(self,summary_text=None):
+
+        google_api_key = os.getenv('GOOGLE_API_KEY')   
         if google_api_key:
             print(f"Google API Key exists and begins {google_api_key[:8]}")
         else:
@@ -120,6 +200,7 @@ class Me:
     
         GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"
         self.gemini = OpenAI(base_url=GEMINI_BASE_URL, api_key=google_api_key)
+        self.model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2') 
         self.name = "Rahul Kolhe"
         # Path to your PDF files (adjust as needed)
         pdf_files = glob.glob("me/*.pdf")   # reads all PDFs inside 'pdfs' folder
@@ -131,10 +212,47 @@ class Me:
             text = page.extract_text()
             if text:
                 self.linkedin += text
+        
         with open("me/summary.txt", "r", encoding="utf-8") as f:
             self.summary = f.read()
-              
 
+        # Load skills from a separate file for fine-grained comparison
+        with open("me/skills.txt", "r", encoding="utf-8") as f:
+            self.skills = f.read()
+
+        if self.summary is not None:
+            self.resume_embedding = self.get_embedding(self.summary)
+        else:
+            self.resume_embedding = None
+            print("Warning: summary_text is None. Resume embedding was not generated.")
+
+        self.resume_skills_embedding = self.get_embedding(self.skills)
+        
+
+    def get_embedding(self, text):
+        """Generates an embedding for the given text."""
+        if not text:
+            return None # Handle empty text gracefully
+        print(f"Encoding text for embedding: {text[:50]}...")
+        return self.model.encode(text, convert_to_tensor=True)
+    
+    def get_missing_skills(self, jd_text):
+        """
+        Analyzes JD for key skills and compares them to resume.
+        This is a simplified approach. A more robust solution might involve
+        a more sophisticated NLP model or a large language model.
+        """
+        prompt = f"Extract a concise list of the most critical technical skills, qualifications, and core responsibilities from the following job description:\n\n{jd_text}\n\nList them one per line."
+        # Use your configured OpenAI model to extract key skills
+        response = self.gemini.chat.completions.create(
+            model="gemini-2.5-flash-preview-05-20",  # Specify a Gemini model
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant"},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        extracted_skills = response.choices[0].message.content.strip().split('\n')
+        return [skill for skill in extracted_skills if skill]
 
     def handle_tool_call(self, tool_calls):
         results = []
@@ -151,10 +269,10 @@ class Me:
         system_prompt = f"You are acting as {self.name}. You are answering questions on {self.name}'s website, \
 particularly questions related to {self.name}'s career, professional background, leaderhsip domain and most important technical skills and experience. \
 Your responsibility is to represent {self.name} for interactions on the website as faithfully as possible. \
-You are given a summary of {self.name}'s background and LinkedIn profile, resume which you can use to answer questions. \
+You are given a summary of {self.name}'s background and LinkedIn profile, resume which you can use to answer questions. Keep ypur answer concise and try to provide details only when asked. \
 Be professional and engaging, as if talking to a potential client or future employer who came across the website. \
 If you don't know the answer to any question, use your record_unknown_question tool to record the question that you couldn't answer, even if it's about something trivial or unrelated to career. \
-If the user is engaging in discussion and asking more than 2 questions, try to steer them towards getting in touch via email; ask for their email and record it using your record_user_details tool. "
+If the user is engaging in discussion and asking more than 2 questions, try to steer them towards getting in touch via email; provide linkedin profile url; email id to connect; ask for their email and record it using your record_user_details tool. "
 
         system_prompt += f"\n\n## Summary:\n{self.summary}\n\n## LinkedIn Profile and Resume:\n{self.linkedin}\n\n"
         system_prompt += f"With this context, please chat with the user, always staying in character as {self.name}."
@@ -187,4 +305,8 @@ If the user is engaging in discussion and asking more than 2 questions, try to s
     
 
 me = Me()
+
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=False)
+
     
