@@ -11,6 +11,7 @@ This is a FastAPI backend that powers the AI Portfolio Assistant. It exposes RES
 - Endpoints:
   - `/api/hello` – Health check
   - `/api/ask` – Chat with the AI assistant
+  - `api/match` - Match JD with Resume skills
 
 ## Setup
 
@@ -24,7 +25,7 @@ This is a FastAPI backend that powers the AI Portfolio Assistant. It exposes RES
    ```sh
    uvicorn app:app --host 0.0.0.0 --port 7860
    ```
-5. Docker support:
+5. Docker support: use port 8000 fro local. 7860 is needed for huggingface
    ```sh
    docker build -t api-assistant .
    docker run -p 7860:7860 --env-file .env api-assistant
