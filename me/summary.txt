@@ -1,143 +1,178 @@
-Rahul Dnyaneshwar Kolhe
-Assistant Vice President | Technology Lead | Cloud & Digital Transformation 
-Technology Strategist | AVP – Driving Digital Banking Innovation, Cloud Transformation & Enterprise Resilience
-📍 Pune, India | 📧 Rahul.d.kolhe@gmail.com | 📞 +91-8975870365|        RahulFreeCoder |      Rahul
-https://rahulkolhe.netlify.app
+Shaping the future of digital banking by building scalable, secure, and cloud-native platforms.
+Turning complex banking challenges into innovative technology solutions that accelerate digital transformation
+Technology leader passionate about mentoring teams, driving cloud modernization, and aligning IT with business strategy.
 
+I like to play badminton and chess. Spend time with my 2 lovely kids.
+
+Rahul Dnyaneshwar Kolhe
+Assistant Vice President | Technology Lead | Cloud & Digital Transformation
+Technology Strategist | AVP – Driving Digital Banking Innovation, Cloud Transformation & Enterprise Resilience
 Professional Summary
-Technology leader with over 19 years of experience in the banking and financial services industry, specializing in Cloud Transformation and Enterprise Resilience. As an Assistant Vice President, I have a proven track record of driving digital modernization, shaping technology roadmaps, and leading global engineering teams. I combine deep technical expertise with a strong ability to mentor and develop others, and to drive continuous improvement by optimizing workflows and promoting a high-performance culture.
-My recent work includes architecting and building an AI-powered portfolio assistant, demonstrating expertise in agentic design, and large language model (LLM) integration. You can view my portfolio of AI and digital projects at: https://rahulkolhe.netlify.app 
-I combine deep technical expertise in cloud-native systems, SRE, and DevOps with a strong ability to mentor teams, influence enterprise architecture standards, and align IT delivery with strategic business objectives. Recognized as a trusted advisor and thought leader, I have consistently delivered programs that improved customer trust, accelerated product innovation, and enabled digital adoption in banking ecosystems.
+Technology leader with 19+ years of experience in banking and financial services, specializing in cloud
+transformation, microservices architecture, and platform engineering. As Assistant Vice President &
+Technology Lead, I bring a proven track record of driving enterprise-scale digital modernization, shaping
+technology roadmaps, and leading global engineering teams to deliver secure, scalable, and
+business-critical solutions.
+I combine deep technical expertise in cloud-native systems, SRE, and DevOps with a strong ability to
+mentor teams, influence enterprise architecture standards, and align IT delivery with strategic business
+objectives. Recognized as a trusted advisor and thought leader, I have consistently delivered programs
+that improved customer trust, accelerated product innovation, and enabled digital adoption in banking
+ecosystems.
 Strategic Impact & Achievements
-Shaped enterprise banking transformation by modernizing legacy platforms into cloud-native microservices architectures, delivering 40% cost savings and enterprise-wide scalability.
-Accelerated product innovation by building reusable templates, design patterns, and component libraries adopted by global teams, reducing onboarding time for junior developers and ensuring enterprise coding standards.
-Advanced operational resilience by architecting end-to-end SRE solutions with Prometheus, Grafana, and Zipkin, enabling 40% MTTR reduction and regulatory-grade observability.
-Championed innovation by developing frameworks and accelerators that were adopted across multiple programs, driving standardization and increasing delivery velocity.
-Delivered business impact by leading cross-functional teams to launch mission-critical banking applications that improved customer experience, reduced processing risks, and enhanced compliance.
-Trusted advisor to senior stakeholders, shaping enterprise technology strategy, influencing global architecture councils, and driving organization-wide transformation
+
+Shaped enterprise banking transformation by modernizing legacy platforms into cloud-native
+microservices architectures, delivering 40% cost savings and enterprise-wide scalability.
+Accelerated product innovation by building reusable templates, design patterns, and component
+libraries adopted by global teams, reducing onboarding time for junior developers and ensuring
+enterprise coding standards.
+
+Advanced operational resilience by architecting end-to-end SRE solutions with Prometheus,
+Grafana, and Zipkin, enabling 40% MTTR reduction and regulatory-grade observability.
+Championed innovation by developing frameworks and accelerators that were adopted across
+multiple programs, driving standardization and increasing delivery velocity.
+Delivered business impact by leading cross-functional teams to launch mission-critical banking
+applications that improved customer experience, reduced processing risks, and enhanced
+compliance.
+
+Trusted advisor to senior stakeholders, shaping enterprise technology strategy, influencing global
+architecture councils, and driving organization-wide transformation
 Improved customer trust and digital adoption by delivering regulatory-grade secure architecture
-Recognized thought leader, awarded Best Emerging Leader, Delivery Excellence, Idea Champion, and Associate of the Quarter for contributions to innovation, delivery governance, and engineering excellence.
+Recognized thought leader, awarded Best Emerging Leader, Delivery Excellence, Idea Champion,
+and Associate of the Quarter for contributions to innovation, delivery governance, and engineering
+excellence.
+
 Innovation & Thought leadership
 
-AI Portfolio Assistant: Designed and built an intelligent agent powered by Google Gemini and FastAPI to serve as a personal portfolio assistant. This tool provides a conversational interface for recruiters to interact with my resume and professional background.
-Agentic Framework Development: Architected a tool-calling framework that enables the AI agent to perform specific tasks, such as analyzing a job description, comparing it to my skills, and providing a relevance score.
-LLM Integration: Leveraged the Gemini API to analyze unstructured data from resumes and job descriptions, extracting key skills and providing a personalized relevance analysis. This project demonstrates hands-on experience in building practical applications with state-of-the-art LLMs.
-Cloud & DevOps: Deployed the application on a cloud platform using modern DevOps practices, including containerization with Docker and API management, ensuring scalability and reliability.
 Published solution patterns and accelerators adopted across global teams.
 Speaker/presenter in internal technology councils and industry forums.
+
 Recognized for influencing strategic digital transformation initiatives.
 Contributed to enterprise-wide innovation forums, influencing future digital banking platforms
-Acted as a mentor for leadership programs, developing next-generation engineering 
+Acted as a mentor for leadership programs, developing next-generation engineering
+Core Competency
 
-Core Competencies & Skills
-Strategic & Leadership Skills
-Technology Leadership: Over 19 years of experience leading teams, shaping technology roadmaps, and driving enterprise-scale digital modernization.
-Strategic Impact: Proven track record of influencing enterprise architecture, aligning IT delivery with strategic business objectives, and acting as a trusted advisor to senior stakeholders.
-Innovation: Championed innovation by developing frameworks and accelerators adopted across multiple programs and publishing solution patterns.
-Enterprise Transformation: Modernized legacy banking platforms into cloud-native microservices, delivering 40% cost savings and enterprise-wide scalability.
-People Leadership: Led and mentored global engineering teams, driving performance management and skill development for junior developers.
-Business Alignment: Collaborated with business leaders to align technology roadmaps with digital transformation strategy.
+Frontend/UI: Micro-Frontend, React.js, Angular, HTML5, CSS3, Bootstrap, Karma/Jasmine/Jest, AG
+grid
 
+Backend & APIs: Java, J2EE, Spring Boot, REST/SOAP , Reactive Microservices, JPA, Hibernate,
+Rsocket, Scala, nodejs, Redis, Kafka
 
+SRE & Observability: Prometheus, Grafana, Micrometer, Zipkin, Sleuth, Alerting Frameworks,
+Reliability Testing, SLI/SLO/SLA governance.
 
-Technical Expertise
+Cloud & DevOps: AWS (Lambda, API Gateway, Cognito, SNS, SES, SQS, IAM), GCP , OpenShift,
+Kubernetes, Docker, Jenkins, Maven, Gradle, Github Actions, Jenkins
 
-AI Agentic : python, openai sdk, agentic workflow, crewai, langchain, Microsoft Autogen, LLMs, Embeddings
-Frontend/UI: Micro-Frontend, React.js, Angular, HTML5, CSS3, Bootstrap.
-Backend & APIs: Java, J2EE, Spring Boot, REST/SOAP, Reactive Microservices, JPA, Hibernate, Node.js.
-Cloud & DevOps: AWS (Lambda, API Gateway, Cognito, SNS, SES, SQS, IAM), GCP, OpenShift, Kubernetes, Docker, Jenkins, GitHub Actions.
-SRE & Observability: Prometheus, Grafana, Micrometer, Zipkin, Sleuth, Alerting Frameworks, Reliability Testing.
-Architecture: Microservices patterns, DDD, Event-Driven Architecture, Clean Architecture, TDD.
-Databases: Oracle, PostgreSQL, DynamoDB, DB2, MySQL, MongoDB.
-Testing: JUnit, TestNG, Cucumber, Apache JMeter, Gatling.
-Legacy Systems: IBM Mainframe, COBOL, JCL, VSAM.
+Architecture: Microservices patterns, DDD, Event-Driven Architecture, Clean Architecture, TDD, J2EE
+Patterns
 
-Operational & Management Skills
-Program & Project Management: Directed and led digital transformation programs and managed the delivery of mission-critical banking applications.
-Cost Management: Modernized platforms to achieve 40% cost savings and reduced maintenance effort by 70%, eliminating licensing costs.
-Compliance & Risk: Championed security-first architecture to achieve 100% regulatory compliance and improved customer trust.
-Agile Expertise: Facilitated SAFe Agile adoption, improving release predictability and stakeholder satisfaction.
-Process Improvement: Implemented reusable templates, design patterns, and component libraries to improve development processes and productivity.
+Databases: Oracle, PostgreSQL, DynamoDB, DB2, MySQL, Mongodb
+Testing: JUnit, TestNG, Cucumber, Loadrunner, Apache jmeter, Gattling,
+Other: IBM Mainframe, COBOL, JCL, VSAM
 
 Experience
+
 DBOI Global Services Private Limited — (2020 – Present)
 Assistant Vice President / Senior Engineer
-Cognizant Technology Solutions - (2008 – 2020) 
+Cognizant Technology Solutions - (2008 – 2020)
 Delivery Lead
-Lionbridge Technology - (2004 – 2008) 
+Lionbridge Technology - (2004 – 2008)
 Software Engineer
 
-Leadership & Business Acumen
-Directed and led digital transformation programs, demonstrating strategic thinking and strong business acumen to align technology with business goals.
-Managed and mitigated project risks by overseeing timeline management, task prioritization, and resource allocation, ensuring successful delivery within scope and budget.
-Cultivated a high-performance culture by providing actionable feedback and mentoring team members on a consistent basis.
-Collaborated effectively with cross-functional teams, acting as a trusted advisor to senior stakeholders to guide change management and ensure alignment across the enterprise.
-Led efforts in DevOps transformation, implementing automation tools to streamline workflows and reduce release cycles from months to weeks.
-Contributed to policy management and governance frameworks, demonstrating accountability and a commitment to strengthening controls.
-
-DBOI Global Services Pvt. Ltd. (2020 – Present) - 
-Architected and delivered cloud-native microservices, driving business requirements translation into technical solutions. My focus was on continuous improvement and enhancing system performance by 3X, while fostering a collaborative and high-performance culture within the team.
-Designed and implemented micro-frontend applications (React, Webpack Module Federation) to improve UX and accelerate product delivery cycles.
-Established UX standards and developed a reusable component library (>100 UI components), ensuring consistent digital experience across enterprise platforms.
-Pioneered innovative solutions, including an automated dependency update framework (Renovate Bot in CI/CD) and downstream workflow redesign, which reduced maintenance effort by 70% and eliminated $500K in licensing costs.
-Led the end-to-end product development lifecycle for mission-critical banking applications, from conceptualization to launch, resulting in faster time-to-market for new financial products.
-Developed standardized templates, reusable frameworks, and design patterns adopted by junior developers, reducing onboarding time and ensuring coding best practices across teams.
-Created a centralized component library and coding guidelines, improving code quality, reusability, and consistency across multiple banking applications.
-Spearheaded the implementation of a comprehensive test automation framework BDD and TDD, establishing robust testing practices that reduced regression cycles by 30% and enabled more frequent, confident deployments.
-Drove engineering process enhancements and continuous improvement by implementing reusable templates and design patterns, which reduced maintenance effort by 70% and cut onboarding time for new developers.
-Mentored and coached junior developers, accelerating their technical growth and enabling faster delivery of high-quality solutions.
-Drove adoption of innovation-led accelerators and solution patterns, scaling productivity improvements across multiple projects.
-Led enterprise DevOps transformation, automating CI/CD pipelines with GitHub Actions, Docker, and Kubernetes, reducing release cycles from 2 months to 2 weeks.
-Migrated legacy ETL workflows (577 feeds) into microservices-based architecture, saving $500K annually in licensing costs.
-Leveraged strategic thinking and business acumen to lead a digital transformation program that modernized legacy platforms into cloud-native microservices, resulting in 40% cost savings and enterprise-wide scalability.
-Championed security-first architecture, implementing OAuth 2.0 and 2FA to achieve 100% regulatory compliance across banking applications.
-Designed and implemented enterprise-grade SRE solutions, integrating monitoring, alerting, and observability into mission-critical banking applications.
-Built end-to-end observability framework using Prometheus, Grafana, Micrometer, Zipkin, and Sleuth, enabling proactive issue detection and reducing MTTR by 40%.
-Developed SRE-driven SLIs/SLOs/SLAs, providing transparency into system reliability and improving stakeholder confidence in production stability.
-Automated incident management workflows with alerting dashboards and self-healing mechanisms, significantly reducing downtime.
-Integrated SRE practices into DevOps pipelines, ensuring reliability testing and resilience engineering became part of release cycles.
-Contributed multiple innovative frameworks and accelerators that were adopted as reusable assets across teams, driving organization-wide efficiency and standardization.
-Collaborated with business leaders to align technology roadmaps with digital transformation strategy, enabling faster go-to-market for financial products.
-Drove productivity optimization by implementing standardized templates and automating CI/CD pipelines, which reduced maintenance effort by 70% and accelerated delivery cycles.
-Fostered a high-performing culture through strategic employee engagement initiatives, providing inspirational leadership that re-energized the team and improved project delivery velocity.
-Provided strategic advice to senior leadership and drove enterprise alignment by aligning technical roadmaps with the corporate digital transformation strategy, enabling faster go-to-market for new products.
-Championed employee development through formal training and one-on-one coaching, accelerating the technical growth of junior engineers and building future technology leaders.
-Provided long-term project leadership for a multi-year digital transformation initiative, successfully delivering a cloud-native platform that achieved 40% cost savings and improved scalability.
-Conducted extensive research and in-depth analysis to solve complex problems, integrating findings into our development process to deliver innovative solutions.
-Averted project delays by implementing proactive escalation management, leading cross-functional teams to resolve technical conflicts and ensure on-time delivery.
-Acted as a subject matter expert to drive critical decision-making on architectural challenges, delivering innovative solutions that improved system scalability and performance by 3X.
-Used negotiation skills and proactive relationship-building to forge trusting partnerships with internal and external stakeholders, ensuring the successful launch of a mission-critical application.
+DBOI Global Services Pvt. Ltd. (2020 – Present) -
+◆
+Architected and delivered cloud-native, event-driven microservices solutions with Spring
+Boot, RSocket, and API Gateway, enhancing system scalability and performance by 3X.
+◆
+Designed and implemented micro-frontend applications (React, Webpack Module
+Federation) to improve UX and accelerate product delivery cycles.
+◆
+Established UX standards and developed a reusable component library (>100 UI
+components), ensuring consistent digital experience across enterprise platforms.
+◆ Pioneered innovative solutions, including an automated dependency update framework
+(Renovate Bot in CI/CD) and downstream workflow redesign, which reduced maintenance
+effort by 70% and eliminated $500K in licensing costs.
+➔
+◆ Developed standardized templates, reusable frameworks, and design patterns adopted by
+junior developers, reducing onboarding time and ensuring coding best practices across
+teams.
+◆ Created a centralized component library and coding guidelines, improving code quality,
+reusability, and consistency across multiple banking applications.
+◆ Mentored and coached junior developers, accelerating their technical growth and enabling
+faster delivery of high-quality solutions.
+◆ Drove adoption of innovation-led accelerators and solution patterns, scaling productivity
+improvements across multiple projects.
+◆
+Led enterprise DevOps transformation, automating CI/CD pipelines with GitHub Actions,
+Docker, and Kubernetes, reducing release cycles from 2 months to 2 weeks.
+◆
+Migrated legacy ETL workflows (577 feeds) into microservices-based architecture, saving
+$500K annually in licensing costs.
+◆ Championed security-first architecture, implementing OAuth 2.0 and 2FA to achieve 100%
+regulatory compliance across banking applications.
+◆
+Designed and implemented enterprise-grade SRE solutions, integrating monitoring,
+alerting, and observability into mission-critical banking applications.
+◆ Built end-to-end observability framework using Prometheus, Grafana, Micrometer, Zipkin,
+and Sleuth, enabling proactive issue detection and reducing MTTR by 40%.
+◆ Developed SRE-driven SLIs/SLOs/SLAs, providing transparency into system reliability and
+improving stakeholder confidence in production stability.
+◆ Automated incident management workflows with alerting dashboards and self-healing
+mechanisms, significantly reducing downtime.
+◆ Integrated SRE practices into DevOps pipelines, ensuring reliability testing and resilience
+engineering became part of release cycles.
+◆ Contributed multiple innovative frameworks and accelerators that were adopted as
+reusable assets across teams, driving organization-wide eﬃciency and standardization.
+◆ Collaborated with business leaders to align technology roadmaps with digital
+transformation strategy, enabling faster go-to-market for financial products.
 
 Cognizant Technology -
-Directed complex digital transformation programs for global banks, demonstrating strong strategic thinking and business acumen by migrating legacy platforms to cloud-native architectures. I provided actionable feedback to a team of over 25 engineers, counseling employees on performance and professional development to ensure project success..
-Delivered mission-critical solutions for debit/credit card processing, loan origination, and collections & recovery, improving transaction efficiency and reducing processing costs.
-Led and mentored teams of 25+ engineers, driving performance management, skill development, and building future technology leaders.
-Defined and implemented enterprise architecture standards, leveraging microservices, REST APIs, and integration with OBP core banking modules, improving product launch timelines.
-Designed and executed complex SQL queries to manage data migration, while developing and maintaining robust SOAP APIs to ensure seamless data exchange for a legacy system migration.
-Drove innovation by conceptualizing and piloting multiple solution accelerators that reduced development effort and enabled faster onboarding of projects.
-Partnered with stakeholders (business & technology) to define product roadmaps, ensuring alignment with strategic business goals.
-Facilitated SAFe Agile adoption, improving release predictability, stakeholder satisfaction, and delivery velocity.
-Introduced solution accelerators, code templates, and reference architectures that streamlined development for large-scale banking programs.
-Enabled junior and mid-level developers to deliver production-grade features faster by providing ready-to-use design patterns and reusable modules.
-Conducted technical training sessions and code reviews, institutionalizing engineering excellence across teams.
-
+◆ Directed digital transformation programs for global banks, migrating legacy platforms to
+cloud-native architectures (AWS, Oracle Banking Platform).
+◆ Delivered mission-critical solutions for debit/credit card processing, loan origination, and
+collections & recovery, improving transaction eﬃciency and reducing processing costs.
+◆ Led and mentored teams of 25+ engineers, driving performance management, skill
+development, and building future technology leaders.
+◆ Defined and implemented enterprise architecture standards, leveraging microservices,
+REST APIs, and integration with OBP core banking modules, improving product launch
+timelines.
+◆ Drove innovation by conceptualizing and piloting multiple solution accelerators that
+reduced development effort and enabled faster onboarding of projects.
+◆ Partnered with stakeholders (business & technology) to define product roadmaps, ensuring
+alignment with strategic business goals.
+◆ Facilitated SAFe Agile adoption, improving release predictability, stakeholder satisfaction,
+and delivery velocity.
+◆ Introduced solution accelerators, code templates, and reference architectures that
+streamlined development for large-scale banking programs.
+◆ Enabled junior and mid-level developers to deliver production-grade features faster by
+providing ready-to-use design patterns and reusable modules.
+◆ Conducted technical training sessions and code reviews, institutionalizing engineering
+excellence across teams.
+➔
 Lionbridge Technology -
-Developed and maintained web applications for insurance and financial clients using Java/J2EE, delivering secure and high-performance solutions.
-Built secure data integration workflows, improving data accuracy and reducing risk in financial systems.
+●
+Developed and maintained web applications for insurance and financial clients using
+Java/J2EE, delivering secure and high-performance solutions.
+●
+Built secure data integration workflows, improving data accuracy and reducing risk in
+financial systems.
+●
 Contributed to QA automation, cutting regression cycle times by 30%.
-
 Certifications -
+
 DB Cloud Engineer
 DB Cloud Data Engineer
 Certified Scrum Master (CSM)
 SAFe Agile Certified
 Udemy certifications: Microfrontend, Rsocket, Redis masterclass
-Education - 
+GCP QWIK labs 
+
+Education -
 Bachelor of Engineering (B.E.) – 2003, Badnera College of Engineering, Amravati
 
-Recognition & Awards - 
- Consistently recognized for leadership, innovation, and delivery excellence, including:
-Best Emerging Leader – for driving team performance and leadership growth.
-Delivery Excellence Award – for ensuring on-time, high-quality delivery of complex programs.
-Idea Champion Award – for pioneering innovative accelerators and reusable frameworks.
-Associate of the Quarter – for exceptional contribution to business-critical projects.
+Recognition & Awards -
+Consistently recognized for leadership, innovation, and delivery excellence, including:
+★ Best Emerging Leader – for driving team performance and leadership growth.
+★ Delivery Excellence Award – for ensuring on-time, high-quality delivery of complex programs.
+★ Idea Champion Award – for pioneering innovative accelerators and reusable frameworks.
+★ Associate of the Quarter – for exceptional contribution to business-critical projects.
