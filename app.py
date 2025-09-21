@@ -3,19 +3,19 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import uvicorn
-from dotenv import load_dotenv
-from openai import OpenAI
+from sentence_transformers import SentenceTransformer, util
 import json
 import os
 import requests
 import glob
 import numpy as np
+import re
+import torch
+from dotenv import load_dotenv
+from openai import OpenAI
 from pypdf import PdfReader
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, UploadFile
-from sentence_transformers import SentenceTransformer, util
-
-
 
 load_dotenv(override=True)
 # Does not need pushover text as of now
@@ -29,9 +29,27 @@ load_dotenv(override=True)
 #         }
 #     )
 # print text to console
+
+# 1️⃣ Predefined skill dictionary
+SKILLS_DICT = [
+    "Frontend/UI" "Micro-Frontend", "React.js", "Angular", "HTML5", "CSS3", "Bootstrap", "Karma/Jasmine/Jest", "AG grid",
+    "Java", "J2EE", "Spring Boot", "REST/SOAP", "Reactive Microservices", "JPA", "Hibernate",
+    "Rsocket", "Scala", "nodejs", "Redis", "Kafka", "Backend & APIs", "SRE & Observability", "Prometheus", "Grafana",
+    "Micrometer", "Zipkin", "Sleuth", "Alerting Frameworks",
+    "Reliability Testing", "SLI/SLO/SLA governance",
+    "Cloud & DevOps", "Lambda", "API Gateway", "Cognito", "SNS", "SES", "SQS", "IAM", "GCP", "OpenShift",
+    "Kubernetes", "Docker", "Jenkins", "Maven", "Gradle", "Github Actions", "Jenkins", "Github actions",
+    "Architecture", "Microservices patterns", "DDD", "Event-Driven Architecture", "Clean Architecture", "TDD",
+    "Design Patterns",
+    "Database", "Oracle", "PostgreSQL", "DynamoDB", "DB2", "MySQL", "Mongodb",
+    "Testing", "JUnit", "TestNG", "Cucumber", "Loadrunner", "Apache jmeter", "Gattling",
+    "Python", "React", "ReactJS", "ML", "NLP", "Cloud",
+    "AWS", "GCP", "Docker", "Kubernetes", "TensorFlow", "PyTorch",
+]
+
 def push(text):
     print(text)
-
+# send email uing Gmail SMTP
 def send_email(to_email, subject, body):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
@@ -42,11 +60,44 @@ def send_email(to_email, subject, body):
     msg["Subject"] = subject
     msg["From"] = sender_email
     msg["To"] = to_email
-
+    print("send email")
     with smtplib.SMTP(smtp_server, smtp_port) as server:
         server.starttls()
         server.login(sender_email, sender_pass)
         server.sendmail(sender_email, [to_email], msg.as_string())
+
+def extract_skills_jd(jd_text):
+    """
+    Extract skills from JD text.
+
+    Args:
+        jd_text (str): Job description text
+        use_llm_fallback (bool): If True, calls Gemini LLM for skill extraction
+
+    Returns:
+        list: list of extracted skills
+    """
+    use_llm_fallback = 1
+    # --- Rule-based extraction ---
+    rule_skills = [skill for skill in SKILLS_DICT if re.search(rf"\b{skill}\b", jd_text, re.IGNORECASE)]
+    # --- Optional: LLM fallback ---
+    if use_llm_fallback:
+       skills_json = me.extract_skills_list(jd_text)
+    
+     # Check the type of skills_json before processing
+    if isinstance(skills_json, str):
+        # If it's a string, split it
+        skills = [s.strip() for s in skills_json.split(",") if s.strip()]
+    elif isinstance(skills_json, list):
+        # If it's already a list, use it directly
+        skills = skills_json
+    else:
+        # Handle any other unexpected types
+        skills = [] # or handle as an error
+
+    return skills
+    
+        
 
 def record_user_details(email, name="Name not provided", notes="not provided"):
     body = f"Recruiter shared details:\n\nName: {name}\nEmail: {email}\nNotes: {notes}"
@@ -103,6 +154,8 @@ record_unknown_question_json = {
 tools = [{"type": "function", "function": record_user_details_json},
         {"type": "function", "function": record_unknown_question_json}]
 
+#FAST API 
+
 origins = [
         "http://localhost:3000",   # CRA dev server
         "http://127.0.0.1:3000",
@@ -143,51 +196,50 @@ async def match_job(file: UploadFile = File(...)):
     else:
         text = (await file.read()).decode("utf-8")
 
-    print(text)
+    print(f"print JD: {text}" )
     # Get embedding for JD
     if text is not None:
-        jd_embedding = me.get_embedding(text)
-        overall_similarity_score = util.cos_sim(me.resume_embedding, jd_embedding).item()
-
-    # Get missing skills
-    missing_skills = []
-    # Only if the overall match is not perfect, analyze for missing skills
-    if overall_similarity_score < 0.85:  # Threshold for "good enough" match
-        jd_skills_list = me.get_missing_skills(text)
-
-        # Step 2: Compare each JD skill against the resume skills embedding
-        for jd_skill in jd_skills_list:
-            skill_embedding = me.get_embedding(jd_skill)
-            
-            # Compare the JD skill against the resume's skills section
-            skill_similarity = util.cos_sim(me.resume_skills_embedding, skill_embedding).item()
-
-            if skill_similarity < 0.4: # Use a suitable threshold
-                # Step 3: Use LLM to verify if the skill is truly missing
-                prompt = (
-                    f"Given the following resume skills: '{me.skills}', "
-                    f"and the job requirement: '{jd_skill}'. "
-                    f"Does the resume meet this requirement, or is it missing? "
-                    f"Answer with 'Missing' or 'Present' and concise and small explanantion"
-                )
+        jd_skills_list = extract_skills_jd(text)
+        print(f"Extracted skills from JD: {jd_skills_list}")
+        if jd_skills_list:
+            jd_embedding = me.get_embedding(jd_skills_list)
+        else:
+            jd_embedding = None  # handle in downstream code
+        
+        sim_matrix = util.cos_sim(jd_embedding, me.resume_skills_embedding)  # shape: (num_jd_skills, num_profile_texts)
+        max_sim_per_jd = sim_matrix.max(dim=1).values  # take highest similarity for each JD skill
+        matched_skills, partial_skills, missing_skills = [], [], []
+        for idx, score in enumerate(max_sim_per_jd):
+            skill = jd_skills_list[idx]
+            if score >= 0.75:
+                matched_skills.append(skill)
+            elif score >= 0.5:
+                partial_skills.append(skill)
+            else:
+                missing_skills.append(skill)
                 
-                response = me.gemini.chat.completions.create(
-                    model="gemini-2.5-flash-preview-05-20", 
-                    messages=[
-                        {"role": "system", "content": "You are a helpful assistant."},
-                        {"role": "user", "content": prompt}
-                    ]
-                )
-                
-                llm_response = response.choices[0].message.content.strip()
-                if "Missing" in llm_response:
-                    missing_skills.append(llm_response)
+    total_skills = len(jd_skills_list)
+    match_percentage = round((len(matched_skills) + 0.5 * len(partial_skills)) / total_skills * 100)
+    print(f" Relevence score {match_percentage}")
+    #provide reasoning for missing skills
+    reasoning = {}
+    if missing_skills is not None:
+        ctr = 0
+        for skill in missing_skills:
+            ctr += 1
+            if ctr < 3:
+                reasoning[skill] = me.get_reasoning(skill)
+
+    output = {
+    "relevance": match_percentage,
+    "message": f"Your profile matches {match_percentage}% with this JD 🚀",
+    "matched_skills": matched_skills,
+    "partial_skills": partial_skills,
+    "missing_skills": missing_skills,
+    "reasoning": reasoning
+}
     # Return the results
-    return {
-        "relevance": round(overall_similarity_score * 100, 2),
-        "message": f"Your profile matches {round(overall_similarity_score * 100, 2)}% with this JD 🚀",
-        "missing_skills": missing_skills
-    }
+    return output
   
 class Me:
     def __init__(self,summary_text=None):
@@ -219,16 +271,45 @@ class Me:
         # Load skills from a separate file for fine-grained comparison
         with open("me/skills.txt", "r", encoding="utf-8") as f:
             self.skills = f.read()
+            self.summary = self.summary + self.skills
 
-        if self.summary is not None:
-            self.resume_embedding = self.get_embedding(self.summary)
+        resume_skills_list = self.extract_skills_list(self.summary)
+        print(f"Extracted skills from resume: {resume_skills_list}")
+        if resume_skills_list:
+            self.resume_skills_embedding  = self.get_embedding(resume_skills_list)
         else:
-            self.resume_embedding = None
-            print("Warning: summary_text is None. Resume embedding was not generated.")
+            self.resume_skills_embedding  = None  # handle in downstream code
+    
+    def extract_skills_list(self, text):
+        prompt = f"""
+            Extract all the key technical and business skills mentioned in the following description. 
+            Return the skills as a comma-separated list includes Technical skills (like programming languages, frameworks, tools, cloud platforms, etc.) 
+            and business skills (like project management, communication, leadership, stakeholder management, etc.) 
+            if possible.
 
-        self.resume_skills_embedding = self.get_embedding(self.skills)
-        
-
+            Description:
+            {text}
+            """
+        response = self.gemini.chat.completions.create(
+                model="gemini-2.5-flash-preview-05-20",
+                messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+                ],
+            )
+            # Parse the JSON response to extract skills
+        try:
+            skills_json = response.choices[0].message.content
+                
+        except Exception as e:
+                print(f"Error parsing LLM response: {e} use dictionary skills")
+                # If empty, fallback to empty list or default skills
+        if not skills_json:
+            skills = []  # or fallback SKILLS_DICT
+        else:
+            skills = [s.strip() for s in skills_json.split(",") if s.strip()]        
+        return skills  
+    
     def get_embedding(self, text):
         """Generates an embedding for the given text."""
         if not text:
@@ -236,6 +317,37 @@ class Me:
         print(f"Encoding text for embedding: {text[:50]}...")
         return self.model.encode(text, convert_to_tensor=True)
     
+    def get_reasoning(self, jd_text):
+        """
+        Analyzes JD for key skills and provide reasoning.
+        """
+        prompt=f"Explain missing skill reasoning concisely: {jd_text} based on this profile: {me.summary}"
+        try:
+            response = self.gemini.chat.completions.create(
+                model="gemini-2.5-flash-preview-05-20",  # Specify a Gemini model
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant"},
+                    {"role": "user", "content": prompt}
+                ],
+            )
+             # Check if response exists and extract content properly
+            if response.choices:
+                message = response.choices[0].message
+                
+                if hasattr(message, 'content'):
+                    response_text = getattr(message, 'content')
+                    
+                    if isinstance(response_text, str) and response_text.strip():
+                        return [line for line in response_text.split('\n') if line]
+            
+            # Return empty list if no valid content
+            return 'Skill Not Found'
+
+        except Exception as e:
+            # Handle potential API errors gracefully
+            print(f"An error occurred during Gemini API call: {e}")
+        return "An error occurred while generating reasoning."
+
     def get_missing_skills(self, jd_text):
         """
         Analyzes JD for key skills and compares them to resume.

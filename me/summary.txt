@@ -57,8 +57,8 @@ grid
 Backend & APIs: Java, J2EE, Spring Boot, REST/SOAP , Reactive Microservices, JPA, Hibernate,
 Rsocket, Scala, nodejs, Redis, Kafka
 
-SRE & Observability: Prometheus, Grafana, Micrometer, Zipkin, Sleuth, Alerting Frameworks,
-Reliability Testing, SLI/SLO/SLA governance.
+    SRE & Observability: Prometheus, Grafana, Micrometer, Zipkin, Sleuth, Alerting Frameworks,
+    Reliability Testing, SLI/SLO/SLA governance.
 
 Cloud & DevOps: AWS (Lambda, API Gateway, Cognito, SNS, SES, SQS, IAM), GCP , OpenShift,
 Kubernetes, Docker, Jenkins, Maven, Gradle, Github Actions, Jenkins
