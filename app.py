@@ -11,6 +11,8 @@ import glob
 import numpy as np
 import re
 import torch
+from io import BytesIO
+from docx import Document
 from dotenv import load_dotenv
 from openai import OpenAI
 from pypdf import PdfReader
@@ -110,6 +112,15 @@ def record_unknown_question(question):
     push(f"Recording {question}")
     return {"recorded": "ok"}
 
+# A simple function to generate the suggestion text.
+def suggest_job_match_analyzer():
+    """
+    Suggests using the Job Match Analyzer to the user.
+    """
+    return {
+        "suggestion": "I can help with that! I have a Job Match Analyzer tool that compares your skills to a job description. Please upload your resume and the job description, and I'll give you a detailed report on how well you match."
+    }
+
 record_user_details_json = {
     "name": "record_user_details",
     "description": "Use this tool to record that a user is interested in being in touch and provided an email address",
@@ -150,9 +161,20 @@ record_unknown_question_json = {
         "additionalProperties": False
     }
 }
+# The JSON schema for the new tool.
+suggest_job_match_analyzer_json = {
+    "name": "suggest_job_match_analyzer",
+    "description": "Use this tool to proactively suggest the Job Match Analyzer tab on current site to the user when they ask about matching their resume to a job or finding a good fit.",
+    "parameters": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": False
+    }
+}
 
 tools = [{"type": "function", "function": record_user_details_json},
-        {"type": "function", "function": record_unknown_question_json}]
+        {"type": "function", "function": record_unknown_question_json},
+        {"type": "function", "function": suggest_job_match_analyzer_json}]
 
 #FAST API 
 
@@ -189,11 +211,23 @@ async def ask(payload: dict):
 async def match_job(file: UploadFile = File(...)):
     # Extract JD text
     text = ""
-    if file.filename.endswith(".pdf"):
+    file_extension = file.filename.split('.')[-1].lower()
+
+    if file_extension == "pdf":
         reader = PdfReader(file.file)
         for page in reader.pages:
             text += page.extract_text() or ""
+    elif file_extension == "docx":
+        docx_bytes = await file.read()
+        docx_stream = BytesIO(docx_bytes)
+        
+        document = Document(docx_stream)
+        
+        for paragraph in document.paragraphs:
+            text += paragraph.text + "\n"
     else:
+        # Handle other file types or raise an error
+        # In this case, we'll just read the content as a string
         text = (await file.read()).decode("utf-8")
 
     print(f"print JD: {text}" )
@@ -240,6 +274,38 @@ async def match_job(file: UploadFile = File(...)):
 }
     # Return the results
     return output
+
+@app.post("/api/generate")
+async def generate_resume(file: UploadFile = File(...)):
+    # Extract JD text
+    text = ""
+    file_extension = file.filename.split('.')[-1].lower()
+
+    if file_extension == "pdf":
+        reader = PdfReader(file.file)
+        for page in reader.pages:
+            text += page.extract_text() or ""
+    elif file_extension == "docx":
+        docx_bytes = await file.read()
+        docx_stream = BytesIO(docx_bytes)
+        
+        document = Document(docx_stream)
+        
+        for paragraph in document.paragraphs:
+            text += paragraph.text + "\n"
+    else:
+        # Handle other file types or raise an error
+        # In this case, we'll just read the content as a string
+        text = (await file.read()).decode("utf-8")
+
+    print(f"print JD: {text}" )
+    # Get embedding for JD
+    if text is not None:
+        #Analyze JD
+        #Synthesis
+        answer = me.generator(text)
+    
+    return {"answer": answer}
   
 class Me:
     def __init__(self,summary_text=None):
@@ -381,10 +447,19 @@ class Me:
         system_prompt = f"You are acting as {self.name}. You are answering questions on {self.name}'s website, \
 particularly questions related to {self.name}'s career, professional background, leaderhsip domain and most important technical skills and experience. \
 Your responsibility is to represent {self.name} for interactions on the website as faithfully as possible. \
-You are given a summary of {self.name}'s background and LinkedIn profile, resume which you can use to answer questions. Keep ypur answer concise and try to provide details only when asked. \
+You are given a summary of {self.name}'s professional background and LinkedIn profile, resume which you can use to answer questions. Keep ypur answer concise and try to provide details only when asked. \
 Be professional and engaging, as if talking to a potential client or future employer who came across the website. \
 If you don't know the answer to any question, use your record_unknown_question tool to record the question that you couldn't answer, even if it's about something trivial or unrelated to career. \
-If the user is engaging in discussion and asking more than 2 questions, try to steer them towards getting in touch via email; provide linkedin profile url; email id to connect; ask for their email and record it using your record_user_details tool. "
+If the user is engaging in discussion and asking more than 2 questions, try to steer them towards getting in touch via email; provide linkedin profile url; email id to connect; ask for their email and record it using your record_user_details tool.\
+Your tools:\
+- `record_unknown_question`: Use this tool immediately if you cannot answer a user's question, regardless of its topic.\
+- `record_user_details`: If the user shows interest in connecting (e.g., asking for contact info) or has been in a long conversation (more than 2 questions), proactively offer to connect and use this tool to record their email and name.\
+- `suggest_job_match_analyzer`: Proactively use this tool when a user asks for help with their resume, a job description, or asks if their skills are a good match or fit for a role. This tool's purpose is to explain the value of the Job Match Analyzer and guide the user on how to use it.\
+Instructions for using tools:\
+- **Prioritize suggesting the job match analyzer** if the user's query is about a resume, a job, or a skill match. This is a key feature of the website.\
+- If a user asks a question you can't answer, immediately use `record_unknown_question`.\
+- After answering a few questions or if the user asks for contact info, use the `record_user_details` tool.\
+"
 
         system_prompt += f"\n\n## Summary:\n{self.summary}\n\n## LinkedIn Profile and Resume:\n{self.linkedin}\n\n"
         system_prompt += f"With this context, please chat with the user, always staying in character as {self.name}."
@@ -414,6 +489,31 @@ If the user is engaging in discussion and asking more than 2 questions, try to s
             else:
                 done = True
         return response.choices[0].message.content
+    
+    def generator(self, jd):
+        generatorprompt = f"You are an expert resume writer and a senior technical recruiter. Your goal is to create a professional, highly-effective resume tailored for a specific job description using the candidate's provided 19 years of industry experience. Your output should be in a clear, professional, ATS-friendly format.\
+**Instructions:**\
+1.  **Analyze the Job Description (JD):** Read the JD and extract all essential keywords, required technical skills, soft skills (e.g., leadership, communication), and core responsibilities. Also, identify any nice-to-have or preferred skills.\
+2.  **Evaluate Experience:** Read the candidate's professional history. Match their experience, skills, and accomplishments to the requirements from the JD. For each requirement, find a relevant example from the candidate's history. For senior-level roles, focus on leadership, architecture, and mentoring.\
+3.  **Rewrite and Generate:** Using the analysis, generate a complete resume.\
+    * **Professional Summary:** Write a concise summary (3-4 lines) that immediately grabs attention by highlighting your 19 years of experience and mentioning the most important skills from the JD.\
+    * **Experience Section:** For each relevant past role, rewrite 3-5 bullet points. Start each bullet point with a strong action verb. Focus on quantifiable achievements and outcomes. Ensure you incorporate the keywords and responsibilities from the JD. For example, if the JD mentions RESTful APIs, your bullet point should explicitly mention how you worked with or led projects involving them.\
+    * **Skills Section:** Create a clean, organized skills section. Categorize skills into relevant groups (e.g., Languages, Frameworks, Cloud, Databases and list all skills mentioned in the JD that are present in your experience.\
+**Candidate's Raw Experience:**\
+{self.summary} + {self.linkedin}\
+**Target Job Description:**\
+{jd}\
+**Final Output:**\
+[Generate the complete, tailored resume in a single, well-formatted block of text.]"
+        
+        messages = (
+            [{"role": "system", "content": generatorprompt}]
+
+            + [{"role": "user", "content": jd}]
+        )
+        response = self.gemini.chat.completions.create(model="gemini-2.5-flash-preview-05-20", messages=messages)
+
+        return response.choices[0].message.content            
     
 
 me = Me()
